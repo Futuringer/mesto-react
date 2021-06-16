@@ -1,51 +1,48 @@
 
-import avatarLogo from './../images/profile-image.jpg'
-function Main() {
+import api from './../utils/Api'
+import React from 'react';
+import Card from './Card'
+function Main(props) {
+  const [userName,setUserName] = React.useState('asd');
+  const [userDescription,setUserDescription] = React.useState();
+  const [userAvatar,setUserAvatar] = React.useState();
+  const [cards,setCards] = React.useState([]);
+  React.useEffect(()=>{
+    api.getUserInfo()
+    .then(userData => {
+      setUserName(userData.name)
+      setUserDescription(userData.about)
+      setUserAvatar(userData.avatar)
+  })},[])
 
-  function handleEditAvatarClick(){
-    document.querySelector('.popup_type_avatar').classList.add('popup_opened')
-  }
-
-  function handleEditProfileClick(){
-    document.querySelector('.popup_type_edit').classList.add('popup_opened')
-  }
+  React.useEffect(()=>{
+    api.getCardsInfo()
+    .then(cardData => {
+      setCards(cardData);
+  })},[])
   
-  function handleAddPlaceClick(){
-    document.querySelector('.popup_type_add-card').classList.add('popup_opened')
-  }
-
   return (
     <main className="content">
       <section className="profile">
         <div className="profile__avatar-hover">
-          <img src={avatarLogo} alt="Аватар пользователя" className="profile__image" />
-          <button onClick={handleEditAvatarClick} className="profile__avatar-edit-button"></button>
+          <img src={userAvatar} alt="Аватар пользователя" className="profile__image" />
+          <button onClick={props.onEditAvatar} className="profile__avatar-edit-button"></button>
         </div>
         <div className="profile__info">
           <div className="profile__name">
-            <h1 className="profile__name-text">Жак-Ив Кусто</h1>
-            <button onClick={handleEditProfileClick} className="profile__edit-button vector-element-opacity" type="button"></button>
+            <h1 className="profile__name-text">{userName}</h1>
+            <button onClick={props.onEditProfile} className="profile__edit-button vector-element-opacity" type="button"></button>
           </div>
-          <p className="profile__description">Исследователь океана</p>
+          <p className="profile__description">{userDescription}</p>
         </div>
-        <button  onClick={handleAddPlaceClick} className="profile__add-button vector-element-opacity" type="button">
+        <button  onClick={props.onAddPlace} className="profile__add-button vector-element-opacity" type="button">
         </button>
       </section>
       <section className="elements">
         <ul className="elements__list">
-          <template id="newCard">
-            <li className="elements__item">
-              <img src="./images/karachaevsk_fillet.png" alt="plug" className="elements__image" />
-              <button className="elements__delete-button vector-element-opacity" type="button"></button>
-              <div className="elements__footer">
-                <h2 className="elements__title"></h2>
-                <div className="elements__likes-container">
-                  <button className="elements__like-button vector-element-opacity" type="button"></button>
-                  <p className="elements__likes-counter">2</p>
-                </div>
-              </div>
-            </li>
-          </template>
+          {cards.map(card => (
+          <Card onCardClick={props.onCardClick} card={card} key={card._id} />
+          ))}
         </ul>
       </section>
     </main>
