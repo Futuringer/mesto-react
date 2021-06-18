@@ -1,11 +1,11 @@
 
-import api from './../utils/Api'
+import api from '../utils/api'
 import React from 'react';
 import Card from './Card'
 function Main(props) {
   const [userName,setUserName] = React.useState('asd');
-  const [userDescription,setUserDescription] = React.useState();
-  const [userAvatar,setUserAvatar] = React.useState();
+  const [userDescription,setUserDescription] = React.useState('');
+  const [userAvatar,setUserAvatar] = React.useState('');
   const [cards,setCards] = React.useState([]);
   React.useEffect(()=>{
     api.getUserInfo()
@@ -13,13 +13,21 @@ function Main(props) {
       setUserName(userData.name)
       setUserDescription(userData.about)
       setUserAvatar(userData.avatar)
-  })},[])
+     })
+    .catch((err) => {
+      console.log(`${err}`);
+    });
+},[])
 
   React.useEffect(()=>{
     api.getCardsInfo()
     .then(cardData => {
       setCards(cardData);
-  })},[])
+  })
+  .catch((err) => {
+    console.log(`${err}`);
+  });
+},[])
   
   return (
     <main className="content">
@@ -48,5 +56,4 @@ function Main(props) {
     </main>
   )
 }
-
 export default Main;
