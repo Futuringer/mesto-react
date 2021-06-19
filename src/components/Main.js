@@ -1,5 +1,5 @@
 
-import {api} from '../utils/api'
+import api from '../utils/api.js'
 import React from 'react';
 import Card from './Card'
 function Main(props) {

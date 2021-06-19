@@ -81,8 +81,7 @@ _handleResponse(res) {
     return Promise.reject(`Ошибка: ${res.status}`);
   }
 }
-
-export const api = new Api({
+const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-24',
   headers: {
     authorization: '0308ef52-354f-4228-a90e-eeca2348fa65',
@@ -90,4 +89,4 @@ export const api = new Api({
   }
 })
 
-//export default api;
+export default api;
