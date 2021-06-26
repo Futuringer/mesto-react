@@ -15,7 +15,7 @@
 @import url("./blocks/elements/__like-button/elements__like-button.css");
 @import url("./blocks/elements/__like-button/_liked/elements__like-button_liked.css");
 @import url("./blocks/elements/__delete-button/elements__delete-button.css");
-
+@import url("./blocks/elements/__delete-button/_hidden/elements__delete-button_hidden.css");
 
 @import url("./blocks/footer/__title/footer__title.css");
 

@@ -5,7 +5,7 @@ function PopupWithForm(props) {
     <button className="popup__close-button vector-element-opacity" type="button" onClick={props.onClose}>
     </button>
     <h3 className="popup__header">{props.title}</h3>
-    <form className="popup__form" name={props.name}>
+    <form className="popup__form" name={props.name} onSubmit={props.onSubmit}>
       {props.children}
       <button className="popup__submit" type="submit">{props.buttonText}</button>
     </form>

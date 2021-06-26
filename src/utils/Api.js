@@ -16,8 +16,8 @@ setUserInfo(data) {
     method: 'PATCH',
     headers: this._headers,
     body: JSON.stringify({
-      name: data['user-name'],
-      about: data.description
+      name: data.name,
+      about: data.about
     })
   }).then(this._handleResponse)
 }
@@ -47,17 +47,9 @@ deleteCard(data) {
   }).then(this._handleResponse)
 }
 
-likeCard(id) {
+changeLikeCardStatus(id, isLiked) {
   return fetch(this._baseUrl + `/cards/likes/${id}`, {
-    method: 'PUT',
-    headers: this._headers
-  })
-  .then(this._handleResponse)
-}
-
-unlikeCard(id) {
-  return fetch(this._baseUrl + `/cards/likes/${id}`, {
-    method: 'DELETE',
+    method: isLiked ? 'PUT' :'DELETE',
     headers: this._headers
   })
   .then(this._handleResponse)
