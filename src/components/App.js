@@ -137,7 +137,6 @@ function handleCardDelete(card) {
         <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser}/> 
         <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlace}/> 
         <PopupWithForm name="confirm" title="Вы уверены?" buttonText='Вы уверены?'>
-          <h3 className="popup__header">Вы уверены?</h3>
         </PopupWithForm>
         <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar}/> 
         <ImagePopup card={selectedCard} onClose={closeAllPopups} />
